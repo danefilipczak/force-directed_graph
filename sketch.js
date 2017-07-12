@@ -2,18 +2,31 @@
 var nodes = [];
 
 
+function initNodes(){
+  for(var i = 0; i<contributors.length; i++){
+    var friend = new Node(contributors[i].name, contributors[i].connections);
+    nodes.push(friend);
+  }
+}
+
+
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   // Add an initial set of boids into the system
 
   //first, make everything
-  var Jahmal = new Node('jahmal', ['lydon']);
-  var Lydon = new Node('lydon', ['jahmal', 'shahira']);
-  var Shahira = new Node('shahira', ['lydon', 'jahmal']);
-  var Dane = new Node('dane', ['lydon', 'jahmal']);
+  // var Jahmal = new Node('jahmal', ['lydon']);
+  // var Lydon = new Node('lydon', ['jahmal', 'shahira']);
+  // var Shahira = new Node('shahira', ['lydon', 'jahmal']);
+  // var Dane = new Node('dane', ['lydon', 'jahmal']);
 
-  nodes = [Jahmal, Lydon, Shahira, Dane];
+  // nodes = [Jahmal, Lydon, Shahira, Dane];
+
   // nodes = [Jahmal];
+
+
+  initNodes();
+
 
   for(var i = 0; i<nodes.length; i++){
     nodes[i].initializeLinks();

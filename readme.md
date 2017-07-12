@@ -1,4 +1,4 @@
-Code for this tutorial: https://medium.com/@danefilipczak/node-based-differential-growth-tutorial-d5287d7c3c86#.mtl2tqjnb
+A force-direced graph for fog machine. 
 <br>Looks like this:
 
-![image](differentialnodes.gif)
+![image](example.gif)
