@@ -4,9 +4,27 @@ var nodes = [];
 
 function initNodes(){
   for(var i = 0; i<contributors.length; i++){
-    var friend = new Node(contributors[i].name, contributors[i].connections);
-    nodes.push(friend);
+    if(contributors[i].name){ //if it's a valid contributor object
+      var friend = new Node(contributors[i].name, contributors[i].connections);
+      nodes.push(friend);
+    }
+    
   }
+}
+
+function drawEdges(){
+  strokeWeight(12);
+  stroke(255, 255, 0, 100);
+  for(var i = 0; i<nodes.length;i++){
+    var n = nodes[i];
+     for(var j = 0; j<n.linkedTo.length; j++){
+
+        line(n.pos.x, n.pos.y, n.linkedTo[j].pos.x, n.linkedTo[j].pos.y);
+      }
+
+  }
+  //console.log('deg')
+ 
 }
 
 
@@ -22,7 +40,8 @@ function setup() {
 
   // nodes = [Jahmal, Lydon, Shahira, Dane];
 
-  // nodes = [Jahmal];
+  // nodes = [Jahmal];  
+  background(0);
 
 
   initNodes();
@@ -34,21 +53,24 @@ function setup() {
 }
 
 function draw() {
-  background(255, 200);
-  rejectAll(nodes, 1, 100);
+  background(0, 200);
+  rejectAll(nodes, 1.5/(nodes.length+5), 200);
   for(var i = 0; i <nodes.length; i++){
     //console.log('poop')
     //rejectAll(nodes[i].linkedTo, 2, 50);
-    nodes[i].loveThyNeighbors(100, -3);
-    nodes[i].removeJitters();
+    nodes[i].loveThyNeighbors(200, -4);
+    nodes[i].center(-2);
+    nodes[i].removeJitters(2);
     //console.log('pop')
   };
 
+  drawEdges();
 
   //flock.run();
   for(var i = 0; i<nodes.length; i++){
-    nodes[i].applyForce();
     nodes[i].display();
+    nodes[i].applyForce();
+    
   }
 
 }

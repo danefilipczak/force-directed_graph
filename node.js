@@ -14,6 +14,7 @@ var Node = function(name, connections) {
   this.show=false;
   this.b = 255;
   this.d = 10;
+  this.escapeVector = p5.Vector.random2D(); //if I need to escape, this is the direction I'll run. Protean graphs?
     this.display = function(){
       //draw a circle at the node's position with diameter of 10
       
@@ -29,15 +30,14 @@ var Node = function(name, connections) {
       //     this.d = 10;
       //   };
       rectMode(CENTER);
+      strokeWeight(1);
       
-      stroke(0)
-      for(var i = 0; i<this.linkedTo.length; i++){
-        line(this.pos.x, this.pos.y, this.linkedTo[i].pos.x, this.linkedTo[i].pos.y);
-      }
-      fill(255);
+      stroke(255)
+      
+      fill(0);
       rect(this.pos.x, this.pos.y, 100, 20);
       noStroke();
-      fill(0)
+      fill(255)
       textAlign(CENTER, CENTER)
       text(this.name, this.pos.x, this.pos.y, 100, 20);
 
@@ -345,6 +345,12 @@ Node.prototype.initializeLinks = function(array){
   }
 };
 
+Node.prototype.center = function(strength){
+  var force = p5.Vector.sub(this.pos, new p5.Vector(width/2, height/2));
+  force.normalize();
+  this.addForce(force.mult(strength));
+}
+
 
 Node.prototype.loveThyNeighbors = function(aThresh, aForce){
   for(var i = 0; i<this.linkedTo.length;i++)
@@ -355,8 +361,8 @@ Node.prototype.loveThyNeighbors = function(aThresh, aForce){
   }
 }
 
-Node.prototype.removeJitters = function(){
-  if(p5.Vector.mag(this.force)<1.1){
+Node.prototype.removeJitters = function(val){
+  if(p5.Vector.mag(this.force)<val){
     this.force = new p5.Vector(0, 0);
   }
 }

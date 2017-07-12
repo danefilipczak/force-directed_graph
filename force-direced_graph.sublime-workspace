@@ -7,6 +7,33 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "readme.md",
+			"settings":
+			{
+				"buffer_size": 84,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "contributors.js",
+			"settings":
+			{
+				"buffer_size": 949,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "node.js",
+			"settings":
+			{
+				"buffer_size": 10832,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -40,14 +67,17 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/danefilipczak/Documents/force-directed_graph"
+		"/Users/danefilipczak/Documents/force-directed_graph",
+		"/Users/danefilipczak/Documents/force-directed_graph/libraries"
 	],
 	"file_history":
 	[
+		"/Users/danefilipczak/Documents/force-directed_graph/index.html",
+		"/Users/danefilipczak/Documents/force-directed_graph/sketch.js"
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -61,6 +91,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"nodes[i]",
+			"this"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -68,6 +100,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"n",
+			"nodes[i]"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -78,14 +112,101 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "readme.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 84,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								18,
+								18
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "contributors.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 949,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								932,
+								932
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "node.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10832,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								908,
+								908
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 179.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 0.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -122,7 +243,7 @@
 	"project": "force-direced_graph.sublime-project",
 	"replace":
 	{
-		"height": 0.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
