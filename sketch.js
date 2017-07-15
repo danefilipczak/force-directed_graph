@@ -2,6 +2,7 @@
 var nodes = [];
 
 
+
 function initNodes(){
   for(var i = 0; i<contributors.length; i++){
     if(contributors[i].name){ //if it's a valid contributor object
@@ -30,23 +31,14 @@ function drawEdges(){
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
-  // Add an initial set of boids into the system
 
-  //first, make everything
-  // var Jahmal = new Node('jahmal', ['lydon']);
-  // var Lydon = new Node('lydon', ['jahmal', 'shahira']);
-  // var Shahira = new Node('shahira', ['lydon', 'jahmal']);
-  // var Dane = new Node('dane', ['lydon', 'jahmal']);
-
-  // nodes = [Jahmal, Lydon, Shahira, Dane];
-
-  // nodes = [Jahmal];  
   background(0);
+  textFont("Monospace");
 
-
+  //make node objects 
   initNodes();
 
-
+  //link them up to their friends
   for(var i = 0; i<nodes.length; i++){
     nodes[i].initializeLinks();
   }
@@ -54,13 +46,25 @@ function setup() {
 
 function draw() {
   background(0, 200);
-  rejectAll(nodes, 1.5/(nodes.length+5), 200);
+  rejectAll(nodes, 1, 200);
   for(var i = 0; i <nodes.length; i++){
     //console.log('poop')
-    //rejectAll(nodes[i].linkedTo, 2, 50);
-    nodes[i].loveThyNeighbors(200, -4);
-    nodes[i].center(-2);
-    nodes[i].removeJitters(2);
+    //rejectAll(nodes[i].linkedTo, 6, 200);
+    nodes[i].loveThyNeighbors(300, -4);
+    nodes[i].center(-3);
+    nodes[i].crowded = false;
+    for(var j = 0; j<nodes.length; j++){
+      if(nodes[j].intersects(nodes[i]) && nodes[j]!==nodes[i]){
+        var fleeForce = 1;
+        nodes[j].flee(fleeForce);
+        // nodes[j].proteanCount++;
+        // nodes[i].proteanCount++;
+        nodes[i].flee(fleeForce);
+        nodes[i].crowded = true;
+        //console.log('fa')
+      } 
+    }
+    nodes[i].removeJitters(0.1);
     //console.log('pop')
   };
 
@@ -68,16 +72,21 @@ function draw() {
 
   //flock.run();
   for(var i = 0; i<nodes.length; i++){
-    nodes[i].display();
+    nodes[i].displayBox();
+    //nodes[i].applyForce();
+    
+  }
+   for(var i = 0; i<nodes.length; i++){
+    nodes[i].displayText();
     nodes[i].applyForce();
     
   }
 
 }
 
-// Add a new boid into the System
-function mouseDragged() {
-  flock.addBoid(new Boid(mouseX,mouseY));
+
+function windowResized(){
+  resizeCanvas(window.innerWidth, window.innerHeight)
 }
 
 
@@ -87,9 +96,9 @@ function rejectAll(nodes, rForce, rThresh){
       //console.log('hey')
       for (var j = 0; j < nodes.length; j++) {
 
-        if (i !== j) {
+        if (nodes[i] !== nodes[j]) {
 
-        if(nodes[j].pos.dist(nodes[i].pos)>rThresh){
+        if(nodes[j].pos.dist(nodes[i].pos)<rThresh){
           //console.log('hey')
 
            // var newPos = p5.Vector.lerp(nodes[i].pos, nodes[j].pos, rForce/nodes.length);
