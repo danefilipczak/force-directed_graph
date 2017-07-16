@@ -1,6 +1,8 @@
 
 var nodes = [];
 
+var current = "";
+
 var prelude = true;
 
 function initNodes(){
@@ -56,17 +58,37 @@ function setup() {
   }, 2000)
 }
 
+
+function updateDiv(current){
+  document.getElementById("info").innerHTML = "some info about <h2>" + current + "</h2>";
+}
+
 function draw() {
+
   background(0, 200);
   rejectAll(nodes, 1, 200);
   if(!prelude){brake = true;}
+  var intersects = [];
   for(var i = 0; i <nodes.length; i++){
     nodes[i].lock=false;
+
     if(nodes[i].mouseIntersects(mouseX, mouseY)){
       brake = false;
-      nodes[i].lock = true;
+      //nodes[i].lock = true;
+      intersects.push(nodes[i]);
+
       //alert('inter')
     }
+    if (intersects.length>=1){
+      intersects[0].lock = true;
+      brake = false;
+      if(intersects[0].name !== current){
+        current = intersects[0].name;
+        updateDiv(current);
+      }
+    } 
+
+
     //console.log('poop')
     //rejectAll(nodes[i].linkedTo, 6, 200);
     nodes[i].loveThyNeighbors(300, -4);
@@ -87,6 +109,7 @@ function draw() {
     nodes[i].removeJitters(0.1);
     //console.log('pop')
   };
+  
 
   drawEdges();
 
