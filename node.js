@@ -19,6 +19,8 @@ var Node = function(name, connections) {
   this.show=false;
   this.proteanCount = 0;
   this.velocity = new p5.Vector(0, 0, 0);
+  this.lock = false;
+  this.maxSpeed = 12;
   // this.b = 255;
   // this.d = 10;
   this.drag = 0.95;
@@ -69,29 +71,51 @@ var Node = function(name, connections) {
 
 
    this.addForce = function(forceVector) {
-      this.force.add(forceVector);
+      if(!this.lock){
+        this.force.add(forceVector);
+      }
+      
   }
+
+
 
 
   this.applyForce = function(){ 
+      if(!this.lock){
+         target = p5.Vector.add(this.pos, this.force);
 
-      target = p5.Vector.add(this.pos, this.force);
+        if(brake){target = this.pos};
+        //target = this.force;
+        //target = new p5.Vector(mouseX, mouseY);
+        var force = p5.Vector.sub(target, this.pos);
+        force.mult(this.strength);
+        this.velocity.mult(this.drag);
+        this.velocity.add(force);
 
-      if(brake){target = this.pos};
-      //target = this.force;
-      //target = new p5.Vector(mouseX, mouseY);
-      var force = p5.Vector.sub(target, this.pos);
-      force.mult(this.strength);
-      this.velocity.mult(this.drag);
-      this.velocity.add(force);
+        //this.pos = this.velocity;
+        this.velocity.limit(this.maxSpeed);
+        this.pos.add(this.velocity);
+        this.force = createVector(0, 0);
+      }
 
-      //this.pos = this.velocity;
-
-      this.pos.add(this.velocity);
-      this.force = createVector(0, 0);
+     
   }
 
 };
+
+Node.prototype.edges = function(){
+  var margin = 10;
+  if(this.pos.x<margin){
+    this.pos.x = margin;
+  } else if (this.pos.x>width-margin){
+    this.pos.x = width-margin;
+  } 
+  if (this.pos.y<margin){
+    this.pos.y = margin;
+  } else if (this.pos.y>height-margin){
+    this.pos.y = height-margin;
+  }
+}
 
 
 Node.prototype.flee = function(force){
@@ -130,6 +154,16 @@ Node.prototype.initializeLinks = function(array){
     }
   }
 };
+
+
+Node.prototype.mouseIntersects = function(mouseX, mouseY){
+  var mx = mouseX;
+  var my = mouseY;
+  var p = this.pos;
+  var hw = this.w/2;
+  var hh = this.h/2;
+  return(mx>p.x-hw&&mx<p.x+hw&&my>p.y-hh&&my<p.y+hh);
+}
 
 Node.prototype.center = function(strength){
   var force = p5.Vector.sub(this.pos, new p5.Vector(width/2, height/2));

@@ -1,7 +1,7 @@
 
 var nodes = [];
 
-
+var prelude = true;
 
 function initNodes(){
   for(var i = 0; i<contributors.length; i++){
@@ -42,17 +42,37 @@ function setup() {
   for(var i = 0; i<nodes.length; i++){
     nodes[i].initializeLinks();
   }
+
+  setTimeout(function(){brake = true;
+    prelude = false;
+    setInterval(function(){
+      brake = false;
+      prelude = true;
+      setTimeout(function(){
+        brake=true;
+        prelude = false;
+      }, 500)
+    }, 7000)
+  }, 2000)
 }
 
 function draw() {
   background(0, 200);
   rejectAll(nodes, 1, 200);
+  if(!prelude){brake = true;}
   for(var i = 0; i <nodes.length; i++){
+    nodes[i].lock=false;
+    if(nodes[i].mouseIntersects(mouseX, mouseY)){
+      brake = false;
+      nodes[i].lock = true;
+      //alert('inter')
+    }
     //console.log('poop')
     //rejectAll(nodes[i].linkedTo, 6, 200);
     nodes[i].loveThyNeighbors(300, -4);
     nodes[i].center(-3);
     nodes[i].crowded = false;
+    nodes[i].edges();
     for(var j = 0; j<nodes.length; j++){
       if(nodes[j].intersects(nodes[i]) && nodes[j]!==nodes[i]){
         var fleeForce = 1;
@@ -73,14 +93,20 @@ function draw() {
   //flock.run();
   for(var i = 0; i<nodes.length; i++){
     nodes[i].displayBox();
+    
     //nodes[i].applyForce();
     
   }
+  
    for(var i = 0; i<nodes.length; i++){
     nodes[i].displayText();
+    
+    
     nodes[i].applyForce();
     
   }
+
+
 
 }
 
