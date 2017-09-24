@@ -91,22 +91,22 @@ function draw() {
 
     //console.log('poop')
     //rejectAll(nodes[i].linkedTo, 6, 200);
-    nodes[i].loveThyNeighbors(300, -4);
+    //nodes[i].loveThyNeighbors(300, -4);
     nodes[i].center(-3);
-    nodes[i].crowded = false;
-    nodes[i].edges();
-    for(var j = 0; j<nodes.length; j++){
-      if(nodes[j].intersects(nodes[i]) && nodes[j]!==nodes[i]){
-        var fleeForce = 1;
-        nodes[j].flee(fleeForce);
-        // nodes[j].proteanCount++;
-        // nodes[i].proteanCount++;
-        nodes[i].flee(fleeForce);
-        nodes[i].crowded = true;
-        //console.log('fa')
-      } 
-    }
-    nodes[i].removeJitters(0.1);
+    // nodes[i].crowded = false;
+    // nodes[i].edges();
+    // for(var j = 0; j<nodes.length; j++){
+    //   if(nodes[j].intersects(nodes[i]) && nodes[j]!==nodes[i]){
+    //     var fleeForce = 1;
+    //     nodes[j].flee(fleeForce);
+    //     // nodes[j].proteanCount++;
+    //     // nodes[i].proteanCount++;
+    //     nodes[i].flee(fleeForce);
+    //     nodes[i].crowded = true;
+    //     //console.log('fa')
+    //   } 
+    // }
+    // nodes[i].removeJitters(0.1);
     //console.log('pop')
   };
   
