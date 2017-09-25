@@ -1,4 +1,2 @@
-A force-direced graph for fog machine. 
-<br>Looks like this:
+A work-in-progress force-direced graph for the poetry micro-press Fog Machine. 
 
-![image](example.gif)
