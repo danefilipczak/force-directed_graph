@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 
 <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="../contributors.js"></script>
 <script>
 // var nodes = [
 //   { id: "mammal", group: 0, label: "Mammals", level: 1 },
@@ -34,63 +36,84 @@
 // 	{ target: "pike"  , source: "cat" , strength: 0.1 }
 // ]
 
-var nodes = [{
-        id: "shahira",
-        label: "Shahira",
-        level: 2
-    }, {
-        id: "dane",
-        label: "Dane",
-        level: 2
-    }, {
-        id: "jahmal",
-        label: "Jahmal",
-        level: 2
-    }, {
-        id: "lydon",
-        label: "Lydon",
-        level: 2
-    }, {
-        id: "dog",
-        label: "Dane's dog (fictional)",
-        level: 2
-    }, {
-        id: "snake",
-        label: "Jahmal's snake"
-    }
+var nodes = [];
+var links = [];
 
-]
-var links = [{
-        target: "dane",
-        source: "shahira",
-        strength: 0.2
-    }, {
-        target: "jahmal",
-        source: "dane",
-        strength: 0.2
-    }, {
-        target: "shahira",
-        source: "jahmal",
-        strength: 0.2
-    }, {
-        target: "shahira",
-        source: "lydon",
-        strength: 0.2
-    }, {
-        target: "dane",
-        source: "dog",
-        strength: 0.2
-    }, {
-        target: "lydon",
-        source: "jahmal",
-        strength: 0.2
-    }, {
-        target: "jahmal",
-        source: "snake",
-        strength: 0.2
-    }
+(function initialize(){
+    console.log('initializing')
+    contributors.forEach(function(node){
+        nodes.push({
+            id:node.id,
+            label:node.name,
+            level:2
+        });
+        node.connections.forEach(function(con){
+            links.push({
+                target:con,
+                source:node.id,
+                strength:0.1
+            })
+        })
+    })
+})();
 
-]
+// var nodes = [{
+//         id: "shahira",
+//         label: "Shahira",
+//         level: 2
+//     }, {
+//         id: "dane",
+//         label: "Dane",
+//         level: 2
+//     }, {
+//         id: "jahmal",
+//         label: "Jahmal",
+//         level: 2
+//     }, {
+//         id: "lydon",
+//         label: "Lydon",
+//         level: 2
+//     }, {
+//         id: "dog",
+//         label: "Dane's dog (fictional)",
+//         level: 2
+//     }, {
+//         id: "snake",
+//         label: "Jahmal's snake"
+//     }
+
+// ]
+// var links = [{
+//         target: "dane",
+//         source: "shahira",
+//         strength: 0.2
+//     }, {
+//         target: "jahmal",
+//         source: "dane",
+//         strength: 0.2
+//     }, {
+//         target: "shahira",
+//         source: "jahmal",
+//         strength: 0.2
+//     }, {
+//         target: "shahira",
+//         source: "lydon",
+//         strength: 0.2
+//     }, {
+//         target: "dane",
+//         source: "dog",
+//         strength: 0.2
+//     }, {
+//         target: "lydon",
+//         source: "jahmal",
+//         strength: 0.2
+//     }, {
+//         target: "jahmal",
+//         source: "snake",
+//         strength: 0.2
+//     }
+
+// ]
 
 
 function getNeighbors(node) {
@@ -110,18 +133,25 @@ function isNeighborLink(node, link) {
 
 function getNodeColor(node, neighbors) {
     if (Array.isArray(neighbors) && neighbors.indexOf(node.id) > -1) {
-        return node.level === 1 ? 'blue' : 'green'
+        return node.level === 1 ? 'blue' : 'blue'
     }
     return node.level === 1 ? 'red' : 'gray'
 }
 
+
+function setSelectedColor(node, selectedNode) {
+    return node == selectedNode ? 'blue' : 'black'
+}
+
 function getLinkColor(node, link) {
-    return isNeighborLink(node, link) ? 'green' : '#E5E5E5'
+    return isNeighborLink(node, link) ? 'blue' : '#E5E5E5'
 }
 
 function getTextColor(node, neighbors) {
     return Array.isArray(neighbors) && neighbors.indexOf(node.id) > -1 ? 'green' : 'black'
 }
+
+
 var width = window.innerWidth
 var height = window.innerHeight
 var svg = d3.select('svg')
@@ -161,66 +191,74 @@ function selectNode(selectedNode) {
     nodeElements.attr('fill', function(node) {
             return getNodeColor(node, neighbors)
         })
-        //textElements.attr('fill', function (node) { return getTextColor(node, neighbors) })
+        textElements.attr('fill', function (node) { return setSelectedColor(node, selectedNode) })
     linkElements.attr('stroke', function(link) {
         return getLinkColor(selectedNode, link)
     })
 }
-var linkElements = svg.append("g")
-    .attr("class", "links")
-    .selectAll("line")
-    .data(links)
-    .enter().append("line")
-    .attr("stroke-width", 1)
-    .attr("stroke", "rgba(50, 50, 50, 0.2)")
-var nodeElements = svg.append("g")
-    .attr("class", "nodes")
-    .selectAll("circle")
-    .data(nodes)
-    .enter().append("circle")
-    .attr("r", 10)
-    .attr("fill", getNodeColor)
-    .call(dragDrop)
-    .on('click', selectNode)
-var textElements = svg.append("g")
-    .attr("class", "texts")
-    .selectAll("text")
-    .data(nodes)
-    .enter().append("text")
-    .text(function(node) {
-        return node.label
+
+
+window.onload = function() {
+    linkElements = svg.append("g")
+        .attr("class", "links")
+        .selectAll("line")
+        .data(links)
+        .enter().append("line")
+        .attr("stroke-width", 1)
+        .attr("stroke", "rgba(50, 50, 50, 0.2)")
+    nodeElements = svg.append("g")
+        .attr("class", "nodes")
+        .selectAll("circle")
+        .data(nodes)
+        .enter().append("circle")
+        .attr("r", 10)
+        .attr("fill", getNodeColor)
+        .call(dragDrop)
+        .on('click', selectNode)
+    textElements = svg.append("g")
+        .attr("class", "texts")
+        .selectAll("text")
+        .data(nodes)
+        .enter().append("text")
+        .text(function(node) {
+            return node.label
+        })
+        .attr("font-size", 25)
+        .attr("font-family", 'Raleway')
+        .attr("dx", 15)
+        .attr("dy", 4)
+
+    simulation.nodes(nodes).on('tick', () => {
+        nodeElements
+            .attr('cx', function(node) {
+                return node.x
+            })
+            .attr('cy', function(node) {
+                return node.y
+            })
+        textElements
+            .attr('x', function(node) {
+                return node.x
+            })
+            .attr('y', function(node) {
+                return node.y
+            })
+        linkElements
+            .attr('x1', function(link) {
+                return link.source.x
+            })
+            .attr('y1', function(link) {
+                return link.source.y
+            })
+            .attr('x2', function(link) {
+                return link.target.x
+            })
+            .attr('y2', function(link) {
+                return link.target.y
+            })
     })
-    .attr("font-size", 25)
-    .attr("dx", 15)
-    .attr("dy", 4)
-simulation.nodes(nodes).on('tick', () => {
-    nodeElements
-        .attr('cx', function(node) {
-            return node.x
-        })
-        .attr('cy', function(node) {
-            return node.y
-        })
-    textElements
-        .attr('x', function(node) {
-            return node.x
-        })
-        .attr('y', function(node) {
-            return node.y
-        })
-    linkElements
-        .attr('x1', function(link) {
-            return link.source.x
-        })
-        .attr('y1', function(link) {
-            return link.source.y
-        })
-        .attr('x2', function(link) {
-            return link.target.x
-        })
-        .attr('y2', function(link) {
-            return link.target.y
-        })
-})
-simulation.force("link").links(links)
+    simulation.force("link").links(links)
+
+}
+
 </script>

@@ -11,7 +11,7 @@
 			"file": "readme.md",
 			"settings":
 			{
-				"buffer_size": 84,
+				"buffer_size": 81,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -20,7 +20,7 @@
 			"file": "contributors.js",
 			"settings":
 			{
-				"buffer_size": 949,
+				"buffer_size": 1609,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -29,7 +29,7 @@
 			"file": "node.js",
 			"settings":
 			{
-				"buffer_size": 10832,
+				"buffer_size": 4251,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -67,8 +67,7 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/danefilipczak/Documents/force-directed_graph",
-		"/Users/danefilipczak/Documents/force-directed_graph/libraries"
+		"/Users/danefilipczak/Developer/force-directed_graph"
 	],
 	"file_history":
 	[
@@ -121,15 +120,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 84,
+						"buffer_size": 81,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								18,
-								18
+								0,
+								0
 							]
 						],
 						"settings":
@@ -149,15 +148,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 949,
+						"buffer_size": 1609,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								932,
-								932
+								0,
+								0
 							]
 						],
 						"settings":
@@ -177,15 +176,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10832,
+						"buffer_size": 4251,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								908,
-								908
+								0,
+								0
 							]
 						],
 						"settings":
