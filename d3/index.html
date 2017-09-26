@@ -3,44 +3,32 @@
 <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 
 <svg width="960" height="600"></svg>
+<div class="bio"></div>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous">
+</script>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="../contributors.js"></script>
+
+<style>
+.bio{
+    position:fixed;
+    top:0px;
+    left:0px;
+    font-family:'Raleway';
+    font-size:20px;
+    width:38.2%;
+    margin:10px;
+}
+</style>
 <script>
-// var nodes = [
-//   { id: "mammal", group: 0, label: "Mammals", level: 1 },
-//   { id: "dog"   , group: 0, label: "Dogs"   , level: 2 },
-//   { id: "cat"   , group: 0, label: "Cats"   , level: 2 },
-//   { id: "fox"   , group: 0, label: "Foxes"  , level: 2 },
-//   { id: "elk"   , group: 0, label: "Elk"    , level: 2 },
-//   { id: "insect", group: 1, label: "Insects", level: 1 },
-//   { id: "ant"   , group: 1, label: "Ants"   , level: 2 },
-//   { id: "bee"   , group: 1, label: "Bees"   , level: 2 },
-//   { id: "fish"  , group: 2, label: "Fish"   , level: 1 },
-//   { id: "carp"  , group: 2, label: "Carp"   , level: 2 },
-//   { id: "pike"  , group: 2, label: "Pikes"  , level: 2 }
-// ]
-// var links = [
-// 	{ target: "mammal", source: "dog" , strength: 0.7 },
-// 	{ target: "mammal", source: "cat" , strength: 0.7 },
-//   { target: "mammal", source: "fox" , strength: 0.7 },
-//   { target: "mammal", source: "elk" , strength: 0.7 },
-//   { target: "insect", source: "ant" , strength: 0.7 },
-//   { target: "insect", source: "bee" , strength: 0.7 },
-//   { target: "fish"  , source: "carp", strength: 0.7 },
-//   { target: "fish"  , source: "pike", strength: 0.7 },
-//   { target: "cat"   , source: "elk" , strength: 0.1 },
-//   { target: "carp"  , source: "ant" , strength: 0.1 },
-//   { target: "elk"   , source: "bee" , strength: 0.1 },
-//   { target: "dog"   , source: "cat" , strength: 0.1 },
-//   { target: "fox"   , source: "ant" , strength: 0.1 },
-// 	{ target: "pike"  , source: "cat" , strength: 0.1 }
-// ]
 
 var nodes = [];
 var links = [];
 
 (function initialize(){
-    console.log('initializing')
     contributors.forEach(function(node){
         nodes.push({
             id:node.id,
@@ -51,69 +39,11 @@ var links = [];
             links.push({
                 target:con,
                 source:node.id,
-                strength:0.1
+                strength:0.005
             })
         })
     })
 })();
-
-// var nodes = [{
-//         id: "shahira",
-//         label: "Shahira",
-//         level: 2
-//     }, {
-//         id: "dane",
-//         label: "Dane",
-//         level: 2
-//     }, {
-//         id: "jahmal",
-//         label: "Jahmal",
-//         level: 2
-//     }, {
-//         id: "lydon",
-//         label: "Lydon",
-//         level: 2
-//     }, {
-//         id: "dog",
-//         label: "Dane's dog (fictional)",
-//         level: 2
-//     }, {
-//         id: "snake",
-//         label: "Jahmal's snake"
-//     }
-
-// ]
-// var links = [{
-//         target: "dane",
-//         source: "shahira",
-//         strength: 0.2
-//     }, {
-//         target: "jahmal",
-//         source: "dane",
-//         strength: 0.2
-//     }, {
-//         target: "shahira",
-//         source: "jahmal",
-//         strength: 0.2
-//     }, {
-//         target: "shahira",
-//         source: "lydon",
-//         strength: 0.2
-//     }, {
-//         target: "dane",
-//         source: "dog",
-//         strength: 0.2
-//     }, {
-//         target: "lydon",
-//         source: "jahmal",
-//         strength: 0.2
-//     }, {
-//         target: "jahmal",
-//         source: "snake",
-//         strength: 0.2
-//     }
-
-// ]
 
 
 function getNeighbors(node) {
@@ -151,11 +81,15 @@ function getTextColor(node, neighbors) {
     return Array.isArray(neighbors) && neighbors.indexOf(node.id) > -1 ? 'green' : 'black'
 }
 
+var svg;
+function sizeCanvas() {
+    var width = window.innerWidth
+    var height = window.innerHeight
+    svg = d3.select('svg')
+    svg.attr('width', width).attr('height', height)
+};
 
-var width = window.innerWidth
-var height = window.innerHeight
-var svg = d3.select('svg')
-svg.attr('width', width).attr('height', height)
+
     // simulation setup with all forces
 var linkForce = d3
     .forceLink()
@@ -168,8 +102,8 @@ var linkForce = d3
 var simulation = d3
     .forceSimulation()
     .force('link', linkForce)
-    .force('charge', d3.forceManyBody().strength(-1120))
-    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('charge', d3.forceManyBody().strength(-120))
+    .force('center', d3.forceCenter(window.innerWidth / 2, window.innerHeight / 2))
 var dragDrop = d3.drag().on('start', function(node) {
     node.fx = node.x
     node.fy = node.y
@@ -186,6 +120,7 @@ var dragDrop = d3.drag().on('start', function(node) {
 })
 
 function selectNode(selectedNode) {
+    $(".bio").html("a little bit of information about <strong>" + selectedNode.label + "</strong>. <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
     var neighbors = getNeighbors(selectedNode)
         // we modify the styles to highlight selected nodes
     nodeElements.attr('fill', function(node) {
@@ -199,6 +134,7 @@ function selectNode(selectedNode) {
 
 
 window.onload = function() {
+    sizeCanvas();
     linkElements = svg.append("g")
         .attr("class", "links")
         .selectAll("line")
@@ -258,6 +194,7 @@ window.onload = function() {
             })
     })
     simulation.force("link").links(links)
+    window.onresize = sizeCanvas;
 
 }
 
