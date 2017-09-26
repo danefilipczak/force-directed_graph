@@ -16,6 +16,28 @@ contributors = [
 	{name: 'Sabra Embury', id: 'sabra', connections: ['sabra', 'hannah']},
 	{name: 'Hannah Lillith Assadi', id: 'hannah', connections: ['sabra']},
 
+	{name: 'Jonathan Raissi', id: 'jonathan', connections: []},
+	{name: 'Karina Vahitova', id: 'jonathan', connections: []},
+	{name: 'Amie Zimmerman', id: 'jonathan', connections: []},
+	{name: 'Emily Liebowitz', id: 'jonathan', connections: []},
+
+	{name: 'Gillian Sze', id: 'gillian', connections: ['adèle']},
+	{name: 'Adèle Barclay', id: 'adèle', connections: ['gillian', 'Inés']},
+	{name: 'Inés Pujos', id: 'Inés', connections: ['adèle']},
+
+	{name: 'Matt Nelson', id: 'Matt', connections: ['s. a.']},
+	{name: 'S. A. Karaskova', id: 's. a.', connections: ['Matt']},
+
+
+	{name: 'Dennis James Sweeney', id: 'dennis', connections: ['michael']},
+	{name: 'Michael Wasson', id: 'michael', connections: ['dennis', 'leila']},
+	{name: 'Leila Chatti', id: 'leila', connections: ['michael']},
+
+
+
+
+
+
 
 	
 
