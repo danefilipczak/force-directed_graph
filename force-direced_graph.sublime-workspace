@@ -20,7 +20,16 @@
 			"file": "contributors.js",
 			"settings":
 			{
-				"buffer_size": 1609,
+				"buffer_size": 1791,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "d3/index.html",
+			"settings":
+			{
+				"buffer_size": 6729,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -67,7 +76,8 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/danefilipczak/Developer/force-directed_graph"
+		"/Users/danefilipczak/Developer/force-directed_graph",
+		"/Users/danefilipczak/Developer/force-directed_graph/d3"
 	],
 	"file_history":
 	[
@@ -76,7 +86,7 @@
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -90,6 +100,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"name",
+			"getTextColor",
+			"text",
+			"font",
 			"nodes[i]",
 			"this"
 		],
@@ -99,6 +113,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"id",
 			"n",
 			"nodes[i]"
 		],
@@ -111,7 +126,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -139,7 +154,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -148,30 +163,60 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1609,
+						"buffer_size": 1791,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1577,
+								1577
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
 						},
-						"translation.x": 0.0,
+						"translation.x": 21.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "d3/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6729,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4588,
+								4588
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2708.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "node.js",
 					"semi_transient": false,
 					"settings":
@@ -194,10 +239,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 179.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
