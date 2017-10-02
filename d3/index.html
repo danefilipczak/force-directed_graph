@@ -18,10 +18,11 @@
     top:0px;
     left:0px;
     font-family:'Raleway';
-    font-size:20px;
-    width:38.2%;
+    font-size:16px;
+    width:300px;
     margin:10px;
     background-color:rgba(255, 255, 255, 0.618);
+    /*z-index:-1;*/
 }
 
 body {
@@ -41,6 +42,19 @@ var nodes = [];
 var links = [];
 
 
+// function toggleGraph() {
+//     if(!visible && !initialized){
+//         showGraph()
+//         visible = true;
+//         initialized = true;
+//     } else if (visible){
+//         $('.graph').hide(1000);
+//         visible = false;
+//     } else if (!visible && initialized){
+//         $('.graph').show(1000);
+//         visible = true;
+//     }
+// }
 
 
 // (function initialize(){
@@ -76,20 +90,21 @@ function isNeighborLink(node, link) {
     return link.target.id === node.id || link.source.id === node.id
 }
 
+var color = '#96AE53';
 function getNodeColor(node, neighbors) {
     if (Array.isArray(neighbors) && neighbors.indexOf(node.id) > -1) {
-        return node.level === 1 ? 'blue' : 'blue'
+        return node.level === 1 ? color : color
     }
     return node.level === 1 ? 'red' : 'gray'
 }
 
 
 function setSelectedColor(node, selectedNode) {
-    return node == selectedNode ? 'blue' : 'black'
+    return node == selectedNode ? '#7D9145' : 'black'
 }
 
 function getLinkColor(node, link) {
-    return isNeighborLink(node, link) ? 'blue' : '#E5E5E5'
+    return isNeighborLink(node, link) ? color : '#E5E5E5'
 }
 
 function getTextColor(node, neighbors) {
