@@ -16,10 +16,6 @@ contributors = [
 	{name: 'Sabra Embury', id: 'sabra', connections: ['sabra', 'hannah']},
 	{name: 'Hannah Lillith Assadi', id: 'hannah', connections: ['sabra']},
 
-	{name: 'Jonathan Raissi', id: 'jonathan', connections: []},
-	{name: 'Karina Vahitova', id: 'jonathan', connections: []},
-	{name: 'Amie Zimmerman', id: 'jonathan', connections: []},
-	{name: 'Emily Liebowitz', id: 'jonathan', connections: []},
 
 	{name: 'Gillian Sze', id: 'gillian', connections: ['adèle']},
 	{name: 'Adèle Barclay', id: 'adèle', connections: ['gillian', 'Inés']},
