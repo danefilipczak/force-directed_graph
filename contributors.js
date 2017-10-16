@@ -45,3 +45,18 @@ contributors = [
 
 
 ]
+
+
+bios = {
+
+	/*
+	Put new bios here. 
+	The ID must be exactly the same as that used above in the contributors list!
+	the Bio can include html... for example, <a href="a_url">link to work</a>
+		template: 
+		'id within single quotes': "bio between double quotes",
+	*/
+
+	'jahmal': "A strapping young lass.",
+	'lydon': "The best the world has.",
+}
